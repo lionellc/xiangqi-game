@@ -2,7 +2,6 @@ import type { StateCreator } from "zustand";
 import {
   createPiece,
   getMoveString,
-  type MoveRecord,
   type MoveStep,
   type Piece,
   type PieceColor,

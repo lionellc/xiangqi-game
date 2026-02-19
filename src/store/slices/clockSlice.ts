@@ -35,7 +35,7 @@ export interface ClockSlice {
 }
 
 export const createClockSlice: StateCreator<any, [], [], ClockSlice> = (set, get) => {
-  const resetClockValues = (rule: ClockRule, state: Partial<ClockSlice> = {}) => {
+  const resetClockValues = (state: Partial<ClockSlice> = {}) => {
     const redBaseTime = state.redBaseTime ?? get().redBaseTime;
     const blackBaseTime = state.blackBaseTime ?? get().blackBaseTime;
     const redStepTime = state.redStepTime ?? get().redStepTime;
@@ -127,18 +127,18 @@ export const createClockSlice: StateCreator<any, [], [], ClockSlice> = (set, get
     resetClock: () => {
       stopClock();
       set({ currentClock: "red", clockRunning: false });
-      set(resetClockValues(get().clockRule));
+      set(resetClockValues());
     },
 
     selectRule: (rule) => {
       set({ clockRule: rule });
-      set(resetClockValues(rule));
+      set(resetClockValues());
       get().resetClock();
     },
 
     updateClockSetting: (payload) => {
       set(payload);
-      set(resetClockValues(get().clockRule, payload));
+      set(resetClockValues(payload));
     },
 
     stopClock,

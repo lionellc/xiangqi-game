@@ -1,6 +1,6 @@
 import type { StateCreator } from "zustand";
 import type { GameData, Fragment } from "../../models/types";
-import type { PieceColor } from "../../lib/xiangqi";
+import type { Piece } from "../../lib/xiangqi";
 import { buildDefaultPieces, clonePieces, getBoardStateAtStep } from "../../lib/boardState";
 
 export interface GameSlice {
@@ -93,7 +93,7 @@ export const createGameSlice: StateCreator<any, [], [], GameSlice> = (set, get) 
     const fragments = JSON.parse(JSON.stringify(game.fragments || []));
     const comments = JSON.parse(JSON.stringify(game.comments || {}));
     const branchPoints = JSON.parse(JSON.stringify(game.branchPoints || {}));
-    const rawBoardState = Array.isArray(game.boardState) ? game.boardState : [];
+    const rawBoardState = Array.isArray(game.boardState) ? (game.boardState as Piece[]) : [];
     const boardState =
       rawBoardState.length > 0
         ? rawBoardState.map((piece, index) => ({

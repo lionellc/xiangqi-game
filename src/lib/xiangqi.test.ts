@@ -4,14 +4,18 @@ import {
   getMoveString,
   mirrorMoveList,
   validateMove,
+  type MoveRecord,
+  type MoveStep,
+  type PieceColor,
+  type PieceType,
 } from "./xiangqi";
 
 const makePiece = (
-  type: string,
-  color: "red" | "black",
+  type: PieceType,
+  color: PieceColor,
   row: number,
   col: number,
-) => createPiece(type as any, color, row, col);
+) => createPiece(type, color, row, col);
 
 describe("validateMove", () => {
   it("允许车在无阻挡时直线移动", () => {
@@ -51,7 +55,7 @@ describe("validateMove", () => {
 
 describe("getMoveString", () => {
   it("生成红方平移棋谱", () => {
-    const move = {
+    const move: MoveStep = {
       type: "车",
       color: "red" as const,
       fromRow: 9,
@@ -64,7 +68,7 @@ describe("getMoveString", () => {
   });
 
   it("生成黑方进步棋谱", () => {
-    const move = {
+    const move: MoveStep = {
       type: "卒",
       color: "black" as const,
       fromRow: 3,
@@ -79,7 +83,7 @@ describe("getMoveString", () => {
 
 describe("mirrorMoveList", () => {
   it("镜像红方平移着法", () => {
-    const move = {
+    const move: MoveRecord = {
       move: "车九平五",
       displayNum: 1,
       stepInfo: {
